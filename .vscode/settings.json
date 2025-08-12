@@ -6,6 +6,19 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "cSpell.language": "en,es-ES",
-  "cSpell.words": ["monolab"]
+  "cSpell.words": [
+    "ctas",
+    "geist",
+    "monolab",
+    "rgba",
+    "tailwindcss",
+    "turbopack"
+  ]
 }
