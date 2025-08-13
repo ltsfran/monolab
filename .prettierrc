@@ -8,6 +8,8 @@
   "quoteProps": "as-needed",
   "endOfLine": "lf",
   "trailingComma": "none",
+  "tailwindFunctions": ["cn", "cva", "clsx"],
+  "plugins": ["prettier-plugin-tailwindcss"],
   "overrides": [
     {
       "files": ["**/*.css"],
