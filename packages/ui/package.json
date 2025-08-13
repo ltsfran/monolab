@@ -3,14 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist",
+    "dist/assets/icons"
+  ],
   "exports": {
     ".": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/main.js"
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
     },
     "./*": {
       "types": "./dist/components/*/index.d.ts",
-      "import": "./dist/components/*/index.js"
+      "import": "./dist/components/*/index.js",
+      "require": "./dist/components/*/index.cjs"
     },
     "./lib.css": "./dist/lib.css",
     "./theme.css": "./dist/theme.css"

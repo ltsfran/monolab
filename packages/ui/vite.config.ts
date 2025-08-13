@@ -66,7 +66,7 @@ export default defineConfig({
           ])
         )
       },
-      output: [createBuildOutput('es')]
+      output: [createBuildOutput('es'), createBuildOutput('cjs')]
     }
   }
 })
