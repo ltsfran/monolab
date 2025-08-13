@@ -12,5 +12,8 @@ describe('Home component', () => {
     expect(
       screen.getByText(/Save and see your changes instantly./i)
     ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /Click me!/i })
+    ).toBeInTheDocument()
   })
 })

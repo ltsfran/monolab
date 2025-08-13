@@ -4,6 +4,8 @@ import { globSync } from 'glob'
 import { extname, relative, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 const assetFileNames = (assetInfo: { name?: string }) => {
@@ -18,16 +20,32 @@ const createBuildOutput = (format: 'es' | 'cjs') => ({
   format,
   entryFileNames: `[name].${FILE_EXTENSIONS[format]}`,
   chunkFileNames: `[name]-[hash].${FILE_EXTENSIONS[format]}`,
-  assetFileNames,
+  assetFileNames
 })
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), tsconfigPaths()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    tsconfigPaths(),
+    dts({
+      tsconfigPath: resolve(__dirname, 'tsconfig.app.json'),
+      exclude: ['lib/utils/**', 'vitest.{setup,config}.ts']
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'lib/assets/icons/*.svg',
+          dest: 'assets/icons'
+        }
+      ]
+    })
+  ],
   build: {
     cssCodeSplit: true,
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'lib/main.ts'),
+      entry: resolve(__dirname, 'lib/main.ts')
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
@@ -37,18 +55,18 @@ export default defineConfig({
             [
               'lib/main.ts',
               'lib/components/**/*.{ts,tsx}',
-              'lib/styles/theme.css',
+              'lib/styles/theme.css'
             ],
             {
-              ignore: ['lib/**/*.{d,stories,test,types}.ts{,x}'],
-            },
+              ignore: ['lib/**/*.{d,stories,test,types}.ts{,x}']
+            }
           ).map((file) => [
             relative('lib', file.slice(0, file.length - extname(file).length)),
-            fileURLToPath(new URL(file, import.meta.url)),
-          ]),
-        ),
+            fileURLToPath(new URL(file, import.meta.url))
+          ])
+        )
       },
-      output: [createBuildOutput('es'), createBuildOutput('cjs')],
-    },
-  },
+      output: [createBuildOutput('es')]
+    }
+  }
 })
