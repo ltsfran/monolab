@@ -13,9 +13,9 @@ const twMerge = extendTailwindMerge({
         'label-small-moderate',
         'label-medium-moderate',
         'label-large-moderate',
-        'label-specific-small-moderate',
+        'label-specific-small-moderate'
       ],
-      radius: ['none', 'small', 'medium', 'large'],
+      radius: ['none', 'small', 'medium', 'large']
     },
     classGroups: {
       'border-w': [{ border: borderWidths }],
@@ -31,10 +31,10 @@ const twMerge = extendTailwindMerge({
       'divide-y': [{ 'divide-y': borderWidths }],
       'ring-w': [{ ring: borderWidths }],
       'outline-w': [{ outline: borderWidths }],
-      'inset-ring-w': [{ 'inset-ring': borderWidths }],
-    },
+      'inset-ring-w': [{ 'inset-ring': borderWidths }]
+    }
   },
-  prefix: 'y',
+  prefix: 'y'
 })
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
